@@ -1,0 +1,42 @@
+// import 'package:flutter/material.dart';
+// import 'package:hrmsproject/in/gov/indianrail/hrms/main/pdffile_new.dart';
+//
+// import 'all_pdf.dart';
+// import 'demo_selectlist.dart';
+// import 'listofpdf.dart';
+//
+//
+//
+//
+//
+// class PdfTab_Select extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: DefaultTabController(
+//         length: 2,
+//         child: Scaffold(
+//           appBar: AppBar(
+//             backgroundColor: Colors.lightBlueAccent,
+//             bottom: TabBar(
+//               tabs: [
+//                 Tab(text: "All PDF",),
+//                 Tab(text: "ESS PDF",),
+//
+//               ],
+//             ),
+//
+//           ),
+//           body: TabBarView(
+//             children: [
+//               Container(child:HomePage()),
+//               Container(child:MyPDFList()),
+//
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
