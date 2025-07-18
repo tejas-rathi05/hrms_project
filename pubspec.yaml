@@ -114,3 +114,43 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  assets:
+    - assets/images/logo.png
+    - assets/images/rail.png
+    - assets/images/cris_logo_primary.png
+    - assets/images/railway.png
+    - assets/images/hrms_logo.png
+    - assets/images/cris_logo_blue.png
+    - assets/images/electronicsr.png
+    - assets/images/scansr.png
+    - assets/images/profile.png
+    - assets/images/user.png
+    - assets/images/user1.png
+    - assets/images/user3.png
+    - assets/images/user4.jpg
+    - assets/images/otp.png
+    - assets/images/password.png
+    - assets/images/phone.png
+    - assets/images/people.png
+    - assets/images/underconstruction.gif
+    - assets/images/card3.jpg
+    - assets/images/card5.jpg
+    - assets/images/card6.jpg
+    - assets/images/card7.jpg
+    - assets/images/card8.jpg
+    - assets/images/cardtkt.jpg
+    - assets/images/ftruts.jpg
+    - assets/images/ftrrailmadad1.jpg
+    - assets/images/indianrail.jpeg
+    - assets/images/edrishtiabt.png
+    - assets/images/irctc.png
+    - assets/images/ftrntes.png
+    - assets/images/cris_logo_blue_new.png
+    - assets/images/cris_logo_primary_new.png
+    - assets/pay_fix.html
+    - assets/ot_nda.html
+    - assets/it2021.html
+    - assets/settle.html
+    - assets/players.json
+    - assets/images/vandebharat.png
+    - assets/images/noImage.png
