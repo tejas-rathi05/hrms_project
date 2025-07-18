@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+#val1 {
+		color:red;
+		font-size:14px;
+		font-weight:bold;
+		background-color:yellow;
+      }
+
+#odd1 {
+		background-color:rgb(250,240,245);
+		color:blue;
+	}
+
+#even1 {
+	    background-color:lightcyan;
+		color:green;
+	}
+
+#btn1 {
+		background-color:lightyellow;
+		color:red;
+		font-size:20px;
+}
+body {
+		background-color: rgb(240,250,250);
+		font-family: verdana;
+}
+
+table {
+		background-color:rgb(150,250,250);
+}
+</style>
+<script>
+function a2(t)
+{
+var gpay = document.getElementById("gpay").value;
+var itd = document.getElementById("itd").value;
+if ( isNaN(itd)  )
+   itd=0;
+   
+if ( itd == "" )
+    itd=0;
+   
+
+   
+ var gpaybuf = parseInt(gpay)-parseInt(itd); 
+opbuf = calculate_it2021(gpaybuf);
+document.getElementById("out_put").innerHTML = opbuf;
+
+}
+
+function calculate_it2021(gpay)
+{
+var opbuf;
+var diff;
+var tax1;
+var tax2b;
+var tax2;
+var cess;
+var gpb;
+var gp;
+var itd = document.getElementById("itd").value;
+var l1=0;
+var l2=0;
+var l3=0;
+var l4=0;
+var l5=0;
+var l6=0;
+var l7=0;
+
+gp = gpay;
+
+if ( gpay < 250001 )
+   {
+tax1 = 0;
+tax2b = 0;
+tax2 = 0;
+cess = 0;
+   }
+else
+   {
+gpb=gp;
+
+if ( gp < 1500000 )
+   {
+  if ( gp < 500000 )
+     {
+     diff=gp-250000;
+     tax1=0;
+     tax2b=diff*0.05;
+	 l1=tax2b;
+     tax2=tax1+tax2b;
+     }
+     
+  else if ( gp < 750000 )
+     {
+     diff=gp-500000;
+     tax1=12500;
+     tax2b=diff*0.10;
+	 l1=12500;
+	 l2=tax2b;
+     tax2=tax1+tax2b;
+     }
+     
+  else if ( gp < 1000000 )
+     {
+     diff=gp-750000;
+     tax1=37500;
+
+     tax2b=diff*0.15;
+	 	 l1=12500;
+	 l2=25000;
+	 l3=tax2b;
+     tax2=tax1+tax2b;
+     }
+
+  else if ( gp < 1250000 )
+     {
+     diff=gp-1000000;
+     tax1=75000;
+     tax2b=diff*0.20;
+	 l1=12500;
+	 l2=25000;
+	 l3=37500;
+	 l4=tax2b;
+     tax2=tax1+tax2b;
+
+     }
+
+  else if ( gp < 1500000 )
+     {
+     diff=gp-1250000;
+     tax1=125000;
+     tax2b=diff*0.25;
+	 l1=12500;
+	 l2=25000;
+	 l3=37500;
+	 l4=50000;
+	 l5=tax2b;
+	 
+     tax2=tax1+tax2b;   
+     }
+     
+  else if ( gp < 250000 )
+     {
+      diff=0;
+      tax1=0;
+      tax2b=0;
+      tax2=0;
+      cess=0;
+     }
+
+   }
+else
+   {
+  diff=gp-1500000;
+  tax1=187500;
+  tax2b=diff*0.30;
+  	 l1=12500;
+	 l2=25000;
+	 l3=37500;
+	 l4=50000;
+	 l5=62500;
+	 l6=tax2b;
+  tax2 = tax1 + tax2b;
+   }
+
+
+   }
+
+if ( tax2 > 0 )
+ cess = Math.round(tax2 * 0.04);
+else
+ cess = 0;
+
+   var gross_tax=0;
+
+  gross_tax =  ( parseInt(tax2) + parseInt(cess) );
+//  diff =  gross_tax - parseInt(itd); 
+// return $rval;
+// return $rv;
+
+
+
+	
+
+
+opbuf = "<table cellpadding=5 border=1 style='border-collapse:collapse'>";
+  opbuf += "<th colspan=3> Gross Pay Range <th> Tax-Slab <th>Tax-Amt.<th>Calculated Amount <br><span style='font-size:11px'>+ 4% Surcharge </span> ";
+  opbuf += "<tr>";
+  opbuf += "<th colspan=3> UpTo  2.5 Lakhs <th> Nil <th> 0 <th> ";
+  opbuf += "<tr>";
+  opbuf += "<th> 2.5 L <th> To <th> 5 Lakhs <th> 5% <th> 12,500 <th> "+l1;
+  opbuf += "<tr>";
+  opbuf += "<th> 5 L <th> To <th> 7.5 Lakhs <th> 10% <th> 25,000 <th>"+l2;
+  opbuf += "<tr>";
+  opbuf += "<th> 7.5 L <th> To <th> 10 Lakhs <th> 15% <th> 37,500 <th> "+l3;
+  opbuf += "<tr>";
+  opbuf += "<th> 10 L <th> To <th> 12.5 Lakhs <th> 20% <th> 50,000 <th> "+l4;
+  opbuf += "<tr>";
+  opbuf += "<th> 12.5 L <th> To <th> 15 Lakhs <th> 25% <th> 62,500 <th> "+l5;
+  opbuf += "<tr>";
+  opbuf += "<th colspan=3> Above 15 Lakhs  <th> 30% <th> <th>  "+l6;
+  opbuf += "<tr>";
+  opbuf += "<th colspan=4> <th> Total ==> <th>"+Math.round(tax2);
+  opbuf += "</table>";
+opbuf += "<center><br><br><table cellpadding=7 border=1 ";
+opbuf += "	style='border-color:blue;border-collapse:collapse; ";
+opbuf += " 	background-color:rgb(250,250,250)'>";
+opbuf += "<th> Tax on "+gpay+"</b> <span style='font-weight:normal;font-size:11px'> [ Col.1-Col.2 ]</span>  <td align=right> "+Math.round(tax2);
+opbuf += "<tr>";
+opbuf += "<th> Cess @ 4% on "+Math.round(tax2)+" <td align=right > "+cess;
+opbuf += "<tr>";
+
+
+  opbuf += "<th> Projected TAX based on Budget 2020 <td style='font-size:28px;color:green'> "+gross_tax;
+//  opbuf += "<tr>";
+ 
+
+opbuf += "</table>";
+
+return opbuf;
+
+}
+
+</script>
+</head>
+<body onLoad='document.f1.gpay.focus();'>
+<center>
+<h2> Tentative Income Tax Projection  </h2>
+ [ March 2020 to February 2021 Projected Gross ] 
+
+<table cellpadding=10 border=0>
+<th> 1 <td>
+<form name=f1 method=post>
+Please enter Gross Earnings  <br> (current financial year)<td> <input type=text name=gpay id=gpay>
+<tr>
+<th> 2 <td>Please enter Income to be exempt from Tax <br>[current financial year]
+<td><input type=text name=itd id=itd>
+<tr>
+<th colspan=3><input type=button name=sub1 value='Please click here to Calculate'
+		onClick=a2(this)>
+</form>
+<tr>
+<td colspan=3>
+<p id=out_put>
+
+</p>
+</table>
+
+
+</body>
+</html>

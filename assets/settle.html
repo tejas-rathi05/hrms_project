@@ -1,0 +1,671 @@
+
+<html>
+<head>
+<style>
+th {
+	text-align:left;
+	font-size:12px;
+	font-weight:normal;
+	}
+	
+</style>
+<script>
+function get_commutation_factor(age)
+{
+
+
+var com_factor = [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+com_factor[20]=9.188;
+com_factor[21]=9.187;
+com_factor[22]=9.186;
+com_factor[23]=9.185;
+com_factor[24]=9.184;
+com_factor[25]=9.183;
+com_factor[26]=9.182;
+com_factor[27]=9.180;
+com_factor[28]=9.178;
+com_factor[29]=9.176;
+com_factor[30]=9.173;
+com_factor[31]=9.169;
+com_factor[32]=9.164;
+com_factor[33]=9.159;
+com_factor[34]=9.152;
+com_factor[35]=9.145;
+com_factor[36]=9.136;
+com_factor[37]=9.126;
+com_factor[38]=9.116;
+com_factor[39]=9.103;
+com_factor[40]=9.090;
+com_factor[41]=9.075;
+com_factor[42]=9.059;
+com_factor[43]=9.040;
+com_factor[44]=9.019;
+com_factor[45]=8.996;
+com_factor[46]=8.971;
+com_factor[47]=8.943;
+com_factor[48]=8.913;
+com_factor[49]=8.881;
+com_factor[50]=8.846;
+com_factor[51]=8.808;
+com_factor[52]=8.768;
+com_factor[53]=8.724;
+com_factor[54]=8.678;
+com_factor[55]=8.627;
+com_factor[56]=8.572;
+com_factor[57]=8.512;
+com_factor[58]=8.446;
+com_factor[59]=8.371;
+com_factor[60]=8.287;
+com_factor[61]=8.194;
+com_factor[62]=8.093;
+com_factor[63]=7.982;
+com_factor[64]=8.862;
+com_factor[65]=8.731;
+com_factor[66]=8.591;
+com_factor[67]=8.431;
+com_factor[68]=8.262;
+com_factor[69]=7.083;
+com_factor[70]=6.897;
+var com;
+age = parseInt(age) + 1;
+
+for ( var i=0; i< com_factor.length; i++)
+{
+if ( parseInt(age) == i )
+  com = com_factor[i];
+}
+
+return com;
+}
+function get_da_rate(dor)
+{
+var da_rate=17;
+return da_rate;
+}
+function npa_yes(a)
+{
+document.getElementById('npa').value=a;
+if ( a == "YES")
+   {
+   document.getElementById('ra').value="NO";
+   }
+if ( a == "NO" )
+{
+a=document.getElementById('exitcd').value;
+
+if ( a == "RT" )
+{ 
+var dob = document.getElementById("dob").value;
+var npa = document.getElementById("npa").value;
+var doba=get_date(dob);
+
+var dor = get_superannuation_date(doba,npa);
+document.getElementById('dor').value=dor;
+}
+
+}
+
+}
+
+function ra_yes(a)
+{
+document.getElementById('ra').value=a;
+
+if ( a == "YES")
+{
+   document.getElementById('npa').value="NO";
+}
+
+}
+
+function exit_yes(a)
+{
+document.getElementById('exitcd').value=a;
+
+if ( a == "RT" )
+{ 
+var dob = document.getElementById("dob").value;
+var npa = document.getElementById("npa").value;
+var doba=get_date(dob);
+
+var dor = get_superannuation_date(doba,npa);
+document.getElementById('dor').value=dor;
+}
+else
+{
+var d;
+var m;
+var y;
+var lastDay = new Date();
+
+		d = lastDay.getDate();
+		m = lastDay.getMonth()+1;
+		y = lastDay.getFullYear();
+		var dor = d+'/'+m+'/'+y;
+document.getElementById('dor').value=dor;
+}
+
+}
+
+
+function cal2()
+{
+var full_pension=0;
+var commuted_pension=0;
+var pension_payable=0;
+var commutation=0;
+
+var gratuity=0;
+var pf_balance=0;
+var encashment=0;
+var family_pension=0;
+var en_family_pension=0;
+var age=0;
+var age_factor=0;
+var qs=0;
+var da_rate=0;
+var da_amt=0;
+var npa_amt=0;
+var ra_amt=0;
+var error_msg;
+var output_msg;
+error_msg=" ";
+output_msg = " ";
+
+var dob = document.getElementById("dob").value;
+var doa = document.getElementById("doa").value;
+var basicpay = document.getElementById("basicpay").value;
+var comm = document.getElementById("comm").value;
+var lap = document.getElementById("lap").value;
+var lhap = document.getElementById("lhap").value;
+var dor = document.getElementById("dor").value;
+var exitcd = document.getElementById("exitcd").value;
+var pf = document.getElementById("pf").value;
+var npa = document.getElementById("npa").value;
+var ra = document.getElementById("ra").value;
+var less1 = document.getElementById("less1").value;
+var add1 = document.getElementById("add1").value;
+
+if ( basicpay == "" )
+   {
+	error_msg="Basic Pay required ...";
+	document.getElementById("errors").innerHTML = error_msg;
+	document.f1.basicpay.focus();
+   return false;
+   }
+   
+if ( lap == "" )
+   {
+   lap=0;
+   }
+   
+if ( lhap == "" )
+	{
+	lhap=0;
+	}
+	
+if ( pf == "" )
+	{
+	pf=0;
+	}
+// alert(dob+' .. '+doa+' .. '+basicpay+' .. '+lap+' .. '+lhap+' .. '+dor+' .. '+exitcd+' .. '+pf+'   ..'+npa+' ,, '+ra);
+
+var doba=get_date(dob);
+var doaa=get_date(doa);
+var dora=get_date(dor);
+
+var datediff = get_date_diff(doba,doaa);
+var spdt = get_superannuation_date(doba,npa);
+var spdta = get_date(spdt);
+var qs_array;
+
+
+
+
+if ( exitcd == 'RT' )
+qs_array = get_date_diff(doaa,spdta);
+else
+qs_array = get_date_diff(doaa,dora);
+
+var da_rate = get_da_rate(dora)
+
+var qs_arr = qs_array.split(',');
+var net_qs = get_net_qs(qs_array,less1,add1);
+qs = get_qs(net_qs);
+
+agea  = get_date_diff(doba,dora);
+var agearr = agea.split(',');
+
+age = agearr[0];
+
+var comm_factor=get_commutation_factor(age);
+
+var tot_qs = qs_array;
+var add_basic = 0;
+
+if ( npa == "YES")
+    add_basic = parseInt(basicpay) * .20;
+
+if ( ra == "YES")
+    add_basic = parseInt(basicpay) * .55;
+var new_basic;
+
+new_basic = parseInt(basicpay) + parseInt(add_basic);
+
+var pension = 0;
+
+pension = parseInt(new_basic)/2;
+en_family_pension = pension;
+family_pension = Math.round(parseInt(new_basic)*0.30);
+commuted_pension = parseInt(parseInt(pension) * (comm/100));
+pension_payable = pension - commuted_pension;
+
+commutation = parseInt( commuted_pension * 12 * comm_factor);
+
+var encash_days_lap;
+var encash_days_lhap;
+
+if ( lap >= 300 )
+   {
+   encash_days_lap=300;
+   encash_days_lhap=0;
+   }
+else
+   {
+   var e1 = 300-lap;
+   var e2;
+   
+
+   if ( lhap > 0 )
+	e2 = lhap;
+   else
+    e2 = 0;
+	
+	if ( e2 >= e1 )
+	   e2=e1;
+
+	   encash_days_lap=lap;
+       encash_days_lhap=e2;
+   }
+var da_amt;
+
+da_amt = ( new_basic * (da_rate/100) );
+// alert(new_basic+" .. "+da_rate+" .. "+da_amt);
+encashment = ( (  (  ( new_basic + da_amt ) / 30 ) * encash_days_lap ) + ( ( (  ( new_basic + da_amt ) / 30 ) /2 ) * encash_days_lhap )  )
+
+var gratuity_dm;
+
+gratuity = Math.round( ( new_basic + da_amt ) * ( qs / 2 ) );
+gratuity_dm = Math.round( ( new_basic + da_amt ) * ( qs  ) );
+
+if ( gratuity > 2000000 )
+   gratuity=2000000;
+
+if ( gratuity_dm > 2000000 )
+   gratuity_dm =2000000;
+  
+if ( exitcd == "DM")
+{
+pension=0;
+commuted_pension=0;
+pension_payable=en_family_pension;
+commutation=0;
+gratuity=gratuity_dm;
+comm_factor=0;
+comm=0;
+
+}
+   
+output_msg = "<table border=1 cellpadding=5 style='border-collapse:collapse'>";
+output_msg += "<th colspan=2> Approximate Settlement Benefits";
+output_msg += "<tr>";
+if ( exitcd != "DM")
+{
+output_msg += "<th> Full-Pension  <td align=right> "+pension;
+output_msg += "<tr>";
+output_msg += "<th> LESS: Commuted-Pension <td align=right>"+commuted_pension;
+output_msg += "<tr>";
+}
+if ( exitcd == "DM")
+output_msg += "<th>En.Family-Pension Payable + DR "
+else
+output_msg += "<th> Pension Payable+DR ";
+output_msg += "<td align=right>"+pension_payable;
+output_msg += "<tr>";
+if ( exitcd != "DM")
+output_msg += "<th> Commutation <td align=right>"+commutation;
+output_msg += "<tr>";
+output_msg += "<th> Gratuity <td align=right>"+gratuity;
+output_msg += "<tr>";
+output_msg += "<th> PF Balance <td align=right>"+pf;
+output_msg += "<tr>";
+output_msg += "<th> Encashment ( LAP = "+encash_days_lap+", LHAP = "+encash_days_lhap+" ) <td align=right>"+encashment;
+output_msg += "<tr>";
+output_msg += "<th> Family Pension <td align=right>"+family_pension;
+output_msg += "<tr>";
+output_msg += "<th> Enhanced Family Pension  <td align=right>"+en_family_pension;
+output_msg += "<tr>";
+output_msg += "<th colspan=2><b> Grp-Insurance & Interest on PF to be added. </B>";
+output_msg += "<tr>";
+output_msg += "<th colspan=2> Secondary Data Derived ...";
+output_msg += "<tr>";
+output_msg += "<th> Gross Qual-Service <td>"+qs_arr[0]+" Years <br>"+qs_arr[1]+" Months <br>"+qs_arr[2]+" Days.";
+output_msg += "<tr>";
+
+output_msg += "<th> Rounded Qual-Service <td>"+qs;
+output_msg += "<tr>";
+output_msg += "<th> Age-Factor <td>"+comm_factor;
+output_msg += "<tr>";
+output_msg += "<th> Age <td>"+age;
+output_msg += "<tr>";
+output_msg += "<th>Comm-Rate <td>"+comm;
+output_msg += "<tr>";
+output_msg += "<th>DA-Rate <td>"+da_rate;
+
+output_msg += "</table>";
+
+
+
+
+/*
+output_msg += doba+" DOA = "+doaa+" DOR = "+dora+"[ "+spdt+" ]";
+output_msg += "<hr>"+datediff;
+output_msg += "<hr>"+qs_array;
+*/
+
+
+if ( npa == "YES")
+{
+   npa_amt = parseInt(basicpay) * 0.20;
+}
+
+if ( ra == "YES")
+{
+	ra_amt = parseInt(basicpay) * 0.55;
+}
+
+
+if ( ( npa_amt > 0 ) && ( ra_amt > 0 ) )
+{
+  error_msg+="\n NPA & Running-Allowance Together not Possible. ";  
+}
+
+document.getElementById("errors").innerHTML = error_msg;
+document.getElementById("out_put").innerHTML = output_msg;
+}
+
+function get_superannuation_date(fr1,npa)
+{
+		var dateFirst = new Date(fr1[1]+"/"+fr1[0]+"/"+fr1[2]);
+			
+		dateFirst.setDate(dateFirst.getDate()-1);
+		if ( npa == "YES")
+			dateFirst.setMonth(dateFirst.getMonth() + 744);
+		else
+			dateFirst.setMonth(dateFirst.getMonth() + 720);
+		
+	//	alert(dateFirst)
+		var d = dateFirst.getDate();
+		var m = dateFirst.getMonth();
+		var y = dateFirst.getFullYear();
+		var lastDay = new Date(y, m+1, 0 );
+//	alert(lastDay);
+		
+		d = lastDay.getDate();
+		m = lastDay.getMonth()+1;
+		y = lastDay.getFullYear();
+		var spdt = d+'/'+m+'/'+y;
+return spdt;
+
+}
+function get_qs(qs_arr)
+{
+
+var qs1a = qs_arr.split(',');
+y=qs1a[0];
+m=qs1a[1];
+
+if ( y >= 33 )
+   qs=33.00;
+else
+{
+if ( m < 3 )
+   qs=y+".25";
+if ( ( m > 2 ) && ( m < 10 ) )
+	qs=y+".50";
+if ( m > 9 )
+    qs=parseInt(y)+1;
+}
+
+return qs;
+
+}
+
+function get_net_qs(qs_array,less1,add1)
+{
+
+var qs1a = qs_array.split(',');
+y=qs1a[0];
+m=qs1a[1];
+d=qs1a[2];
+day1 = add1-less1;
+// alert(day1);
+
+var no_of_days = parseInt(y*360)+parseInt(m*30)+parseInt(d);
+
+no_of_days = parseInt(no_of_days) + parseInt(day1);
+var y1 = parseInt(no_of_days/360) ;
+
+var y2 = y1*360;
+var yr1 = y1;
+
+var y3 = parseInt(no_of_days)-parseInt(y2)
+y1 = parseInt(y3/30);
+y2 = y1*30;
+var y4 = parseInt(y3)-parseInt(y2);
+
+var mn1 = y1;
+var dy1 = y4;
+ 
+// alert(yr1+' .. '+mn1+' .. '+dy1);
+
+// alert(qs1a[0]+"   "+qs1a[1]+"   "+qs1a[2]);
+
+
+
+	
+net_qs = y+','+m+','+d;
+return net_qs;
+
+}
+
+function get_date_diff(fr1,to1)
+{
+		var dateFirst = new Date(fr1[1]+"/"+fr1[0]+"/"+fr1[2]);
+        var dateSecond = new Date(to1[1]+"/"+to1[0]+"/"+to1[2]);
+		
+		dateFirst.setDate(dateFirst.getDate()-1);
+// alert(dateFirst);
+// alert(dateSecond);
+			
+		
+		var age = dateSecond.getFullYear() - dateFirst.getFullYear();
+		var m = dateSecond.getMonth() - dateFirst.getMonth();
+		var d = dateSecond.getDate() - dateFirst.getDate();
+//	alert("age ="+age+" month = "+m+" day = "+d);
+	
+	if ( ( m < 0 ) || ( ( m == 0 ) && ( dateSecond.getDate() < dateFirst.getDate() ) )  )
+	   age--;
+	   
+	if ( m < 0 )
+	  m = m + 12;
+	
+	if ( d < 0 )
+	   {
+	   d = d + 30;
+	   m--;
+	   }
+	 
+	 	
+    if (m < 0 || (m === 0 && dateSecond.getDate() < dateFirst.getDate())) 
+    {
+        age--;
+    }
+	
+//		alert('Year '+age+' Months '+m+' days = '+d);
+         // time difference
+diffa = age+','+m+','+d;
+
+		 return diffa;
+}
+
+function get_date(d1)
+{
+var a1 = [ "-","_",",","|","~" ];
+var d2;
+var dt1;
+var dt2;
+var dt3;
+var dta;
+
+for (var i=0; i<a1.length;i++)
+{
+   d2 = d1.replace(a1[i],'/');
+   d1 = d2;
+ } 
+ 
+if ( d1.length == 8 )
+   {
+  dt1 = d1.substring(0,2);
+  dt2 = d1.substring(2,4);
+  dt3 = d1.substring(4,8);
+  d1 = dt1+"/"+dt2+"/"+dt3;  
+   }
+dta = d1.split("/");
+ 
+return dta;
+
+}
+
+</script>
+
+
+</head>
+<body>
+<h2> Settlement Benefits </h2>
+<div id=errors style='color:red'>
+</div>
+<span style='font-size:14px;color:red'> Please enter all dates in <b>dd/mm/yyyy</b> format </span>
+<table cellpadding=3 border=1 style='border-collapse:collapse' >
+<th> Date of Birth <form name=f1><td><input type=text name=dob id=dob size=12> 
+<tr>
+<th> Date of Appointment <td><input type=text name=doa id=doa size=12>
+<tr>
+<th> Last-Drawn Basic-Pay<td><input type=text name=basicpay id=basicpay size=6>
+<tr>
+<th> Commutation-%age <td><select name="comm" id="comm">
+<option value="40"> 40 </option>
+<option value="39"> 39 </option>
+<option value="38"> 38 </option>
+<option value="37"> 37 </option>
+<option value="36"> 36 </option>
+<option value="35"> 35 </option>
+<option value="34"> 34 </option>
+<option value="33"> 33 </option>
+<option value="32"> 32 </option>
+<option value="31"> 31 </option>
+<option value="30"> 30 </option>
+<option value="29"> 29 </option>
+<option value="28"> 28 </option>
+<option value="27"> 27 </option>
+<option value="26"> 26 </option>
+<option value="25"> 25 </option>
+<option value="24"> 24 </option>
+<option value="23"> 23 </option>
+<option value="22"> 22 </option>
+<option value="21"> 21 </option>
+<option value="20"> 20 </option>
+<option value="19"> 19 </option>
+<option value="18"> 18 </option>
+<option value="17"> 17 </option>
+<option value="16"> 16 </option>
+<option value="15"> 15 </option>
+<option value="14"> 14 </option>
+<option value="13"> 13 </option>
+<option value="12"> 12 </option>
+<option value="11"> 11 </option>
+<option value="10"> 10 </option>
+<option value="9"> 9 </option>
+<option value="8"> 8 </option>
+<option value="7"> 7 </option>
+<option value="6"> 6 </option>
+<option value="5"> 5 </option>
+<option value="4"> 4 </option>
+<option value="3"> 3 </option>
+<option value="2"> 2 </option>
+<option value="1"> 1 </option>
+<option value="0"> 0 </option>
+</select>
+<span style='font-size:14px'>( If you don't want to <br> commute , please select '0' )</span>
+<tr>
+
+<th> L A P  * Balance <td><input type=text name=lap id=lap size=6>
+<tr>
+<th> L H A P *  Balance<td><input type=text name=lhap id=lhap size=6>
+<tr>
+<th> Non-Pract-Allowance 
+<td><input type=hidden name=npa id=npa>
+<input type=radio name=npa1 value=YES onClick=npa_yes(this.value);> YES
+<input type=radio name=npa1 value=NO onClick=npa_yes(this.value);> NO
+<tr>
+<th> Retirement Type 
+<td><input type=hidden name=exit_code id=exitcd>
+<input type=radio name=exitcd value=RT onClick=exit_yes(this.value); >RT 
+&nbsp;&nbsp;
+<input type=radio name=exitcd value=VR onClick=exit_yes(this.value); >VR
+&nbsp;&nbsp;
+<input type=radio name=exitcd value=DM onClick=exit_yes(this.value); >DM
+
+
+
+<tr>
+<th> Date of Exit from Service <td><input type=text name=dor id=dor size=12>
+<tr>
+<th> PF Balance <td><input type=text name=pf id=pf size=7>
+
+
+<tr>
+<th> Running-Allowance 
+<td><input type=hidden name=ra id=ra>
+<input type=radio name=ra1 value=YES onClick=ra_yes(this.value);> YES
+<input type=radio name=ra1 value=NO onClick=ra_yes(this.value);> NO
+<tr>
+<th>Less Service <br>{ EOL, Dies-non etc } <td> <input type=text name=less1 id=less1 value=0 size=6> in Days
+<tr>
+<th>Add Service <br> { Prev.Service etc } <td><input type=text name=add1 id=add1 value=0 size=6> in Days 
+<tr>
+<th colspan=2><center> <input type=button name=button value=Calculate 
+		onClick=cal2();>
+		</form>
+		
+</table>
+
+<table>
+
+<td>
+<tr>
+<td>
+<div id=out_put>
+</div>
+
+
+
+</table>
+
+
+
+
+
+
+</body>
+</html>

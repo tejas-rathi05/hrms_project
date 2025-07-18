@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+#val1 {
+		color:red;
+		font-size:14px;
+		font-weight:bold;
+		background-color:yellow;
+      }
+
+#odd1 {
+		background-color:rgb(250,240,245);
+		color:blue;
+	}
+
+#even1 {
+	    background-color:lightcyan;
+		color:green;
+	}
+
+#btn1 {
+		background-color:lightyellow;
+		color:red;
+		font-size:20px;
+}
+body {
+		background-color: rgb(240,250,250);
+		font-family: verdana;
+}
+
+table {
+		background-color:rgb(150,250,250);
+}
+</style>
+<script>
+
+var lev_arr=[ "00", "1","2","3","4","5","6","7","8","9","10","11","12","13","13A","14","15" ];
+llen = lev_arr.length;
+
+function get_levels()
+{
+	var oddeven;
+
+optn = " <select id='lev1' name=levels1 onChange='Javascript:a1(this);'> ";
+for ( i=0; i<llen; i++)
+    {
+	oddeven = ( oddeven == "odd1") ? "even1" : "odd1";
+	optn += "<option id='"+oddeven+"' value='"+lev_arr[i]+"'>&nbsp;&nbsp;&nbsp;"+lev_arr[i]+"</option>";
+    }
+optn += "</select>";
+
+//  alert(optn);
+
+document.getElementById("aa11").innerHTML = optn;
+
+optn = " <select id='lev11' name=levels11 onChange='Javascript:a2(this);'> ";
+for ( i=0; i<llen; i++)
+    {
+	oddeven = ( oddeven == "odd1") ? "even1" : "odd1";
+	optn += "<option id='"+oddeven+"' value='"+lev_arr[i]+"'>&nbsp;&nbsp;&nbsp;"+lev_arr[i]+"</option>";
+    }
+optn += "</select>";
+
+ document.getElementById("aa12").innerHTML = optn;
+}
+
+var bpay = new Array();
+
+bpay[0] = 0;
+bpay[1] = 18000;
+bpay[2] = 18500;
+bpay[3] = 19100;
+bpay[4] = 19700;
+bpay[5] = 20300;
+bpay[6] = 20900;
+bpay[7] = 21500;
+bpay[8] = 22100;
+bpay[9] = 22800;
+bpay[10] = 23500;
+bpay[11] = 24200;
+bpay[12] = 24900;
+bpay[13] = 25600;
+bpay[14] = 26400;
+bpay[15] = 27200;
+bpay[16] = 28000;
+bpay[17] = 28800;
+bpay[18] = 29700;
+bpay[19] = 30600;
+bpay[20] = 31500;
+bpay[21] = 32400;
+bpay[22] = 33400;
+bpay[23] = 34400;
+bpay[24] = 35400;
+bpay[25] = 36500;
+bpay[26] = 37600;
+bpay[27] = 38700;
+bpay[28] = 39900;
+bpay[29] = 41100;
+bpay[30] = 42300;
+bpay[31] = 43600;
+bpay[32] = 44900;
+bpay[33] = 46200;
+bpay[34] = 47600;
+bpay[35] = 49000;
+bpay[36] = 50500;
+bpay[37] = 52000;
+bpay[38] = 53600;
+bpay[39] = 55200;
+bpay[40] = 56900;
+bpay[41] = 19900;
+bpay[42] = 20500;
+bpay[43] = 21100;
+bpay[44] = 21700;
+bpay[45] = 22400;
+bpay[46] = 23100;
+bpay[47] = 23800;
+bpay[48] = 24500;
+bpay[49] = 25200;
+bpay[50] = 26000;
+bpay[51] = 26800;
+bpay[52] = 27600;
+bpay[53] = 28400;
+bpay[54] = 29300;
+bpay[55] = 30200;
+bpay[56] = 31100;
+bpay[57] = 32000;
+bpay[58] = 33000;
+bpay[59] = 34000;
+bpay[60] = 35000;
+bpay[61] = 36100;
+bpay[62] = 37200;
+bpay[63] = 38300;
+bpay[64] = 39400;
+bpay[65] = 40600;
+bpay[66] = 41800;
+bpay[67] = 43100;
+bpay[68] = 44400;
+bpay[69] = 45700;
+bpay[70] = 47100;
+bpay[71] = 48500;
+bpay[72] = 50000;
+bpay[73] = 51500;
+bpay[74] = 53000;
+bpay[75] = 54600;
+bpay[76] = 56200;
+bpay[77] = 57900;
+bpay[78] = 59600;
+bpay[79] = 61400;
+bpay[80] = 63200;
+bpay[81] = 21700;
+bpay[82] = 22400;
+bpay[83] = 23100;
+bpay[84] = 23800;
+bpay[85] = 24500;
+bpay[86] = 25200;
+bpay[87] = 26000;
+bpay[88] = 26800;
+bpay[89] = 27600;
+bpay[90] = 28400;
+bpay[91] = 29300;
+bpay[92] = 30200;
+bpay[93] = 31100;
+bpay[94] = 32000;
+bpay[95] = 33000;
+bpay[96] = 34000;
+bpay[97] = 35000;
+bpay[98] = 36100;
+bpay[99] = 37200;
+bpay[100] = 38300;
+bpay[101] = 39400;
+bpay[102] = 40600;
+bpay[103] = 41800;
+bpay[104] = 43100;
+bpay[105] = 44400;
+bpay[106] = 45700;
+bpay[107] = 47100;
+bpay[108] = 48500;
+bpay[109] = 50000;
+bpay[110] = 51500;
+bpay[111] = 53000;
+bpay[112] = 54600;
+bpay[113] = 56200;
+bpay[114] = 57900;
+bpay[115] = 59600;
+bpay[116] = 61400;
+bpay[117] = 63200;
+bpay[118] = 65100;
+bpay[119] = 67100;
+bpay[120] = 69100;
+bpay[121] = 25500;
+bpay[122] = 26300;
+bpay[123] = 27100;
+bpay[124] = 27900;
+bpay[125] = 28700;
+bpay[126] = 29600;
+bpay[127] = 30500;
+bpay[128] = 31400;
+bpay[129] = 32300;
+bpay[130] = 33300;
+bpay[131] = 34300;
+bpay[132] = 35300;
+bpay[133] = 36400;
+bpay[134] = 37500;
+bpay[135] = 38600;
+bpay[136] = 39800;
+bpay[137] = 41000;
+bpay[138] = 42200;
+bpay[139] = 43500;
+bpay[140] = 44800;
+bpay[141] = 46100;
+bpay[142] = 47500;
+bpay[143] = 48900;
+bpay[144] = 50400;
+bpay[145] = 51900;
+bpay[146] = 53500;
+bpay[147] = 55100;
+bpay[148] = 56800;
+bpay[149] = 58500;
+bpay[150] = 60300;
+bpay[151] = 62100;
+bpay[152] = 64000;
+bpay[153] = 65900;
+bpay[154] = 67900;
+bpay[155] = 69900;
+bpay[156] = 72000;
+bpay[157] = 74200;
+bpay[158] = 76400;
+bpay[159] = 78700;
+bpay[160] = 81100;
+bpay[161] = 29200;
+bpay[162] = 30100;
+bpay[163] = 31000;
+bpay[164] = 31900;
+bpay[165] = 32900;
+bpay[166] = 33900;
+bpay[167] = 34900;
+bpay[168] = 35900;
+bpay[169] = 37000;
+bpay[170] = 38100;
+bpay[171] = 39200;
+bpay[172] = 40400;
+bpay[173] = 41600;
+bpay[174] = 42800;
+bpay[175] = 44100;
+bpay[176] = 45400;
+bpay[177] = 46800;
+bpay[178] = 48200;
+bpay[179] = 49600;
+bpay[180] = 51100;
+bpay[181] = 52600;
+bpay[182] = 54200;
+bpay[183] = 55800;
+bpay[184] = 57500;
+bpay[185] = 59200;
+bpay[186] = 61000;
+bpay[187] = 62800;
+bpay[188] = 64700;
+bpay[189] = 66600;
+bpay[190] = 68600;
+bpay[191] = 70700;
+bpay[192] = 72800;
+bpay[193] = 75000;
+bpay[194] = 77300;
+bpay[195] = 79600;
+bpay[196] = 82000;
+bpay[197] = 84500;
+bpay[198] = 87000;
+bpay[199] = 89600;
+bpay[200] = 92300;
+bpay[201] = 35400;
+bpay[202] = 36500;
+bpay[203] = 37600;
+bpay[204] = 38700;
+bpay[205] = 39900;
+bpay[206] = 41100;
+bpay[207] = 42300;
+bpay[208] = 43600;
+bpay[209] = 44900;
+bpay[210] = 46200;
+bpay[211] = 47600;
+bpay[212] = 49000;
+bpay[213] = 50500;
+bpay[214] = 52000;
+bpay[215] = 53600;
+bpay[216] = 55200;
+bpay[217] = 56900;
+bpay[218] = 58600;
+bpay[219] = 60400;
+bpay[220] = 62200;
+bpay[221] = 64100;
+bpay[222] = 66000;
+bpay[223] = 68000;
+bpay[224] = 70000;
+bpay[225] = 72100;
+bpay[226] = 74300;
+bpay[227] = 76500;
+bpay[228] = 78800;
+bpay[229] = 81200;
+bpay[230] = 83600;
+bpay[231] = 86100;
+bpay[232] = 88700;
+bpay[233] = 91400;
+bpay[234] = 94100;
+bpay[235] = 96900;
+bpay[236] = 99800;
+bpay[237] = 102800;
+bpay[238] = 105900;
+bpay[239] = 109100;
+bpay[240] = 112400;
+bpay[241] = 44900;
+bpay[242] = 46200;
+bpay[243] = 47600;
+bpay[244] = 49000;
+bpay[245] = 50500;
+bpay[246] = 52000;
+bpay[247] = 53600;
+bpay[248] = 55200;
+bpay[249] = 56900;
+bpay[250] = 58600;
+bpay[251] = 60400;
+bpay[252] = 62200;
+bpay[253] = 64100;
+bpay[254] = 66000;
+bpay[255] = 68000;
+bpay[256] = 70000;
+bpay[257] = 72100;
+bpay[258] = 74300;
+bpay[259] = 76500;
+bpay[260] = 78800;
+bpay[261] = 81200;
+bpay[262] = 83600;
+bpay[263] = 86100;
+bpay[264] = 88700;
+bpay[265] = 91400;
+bpay[266] = 94100;
+bpay[267] = 96900;
+bpay[268] = 99800;
+bpay[269] = 102800;
+bpay[270] = 105900;
+bpay[271] = 109100;
+bpay[272] = 112400;
+bpay[273] = 115800;
+bpay[274] = 119300;
+bpay[275] = 122900;
+bpay[276] = 126600;
+bpay[277] = 130400;
+bpay[278] = 134300;
+bpay[279] = 138300;
+bpay[280] = 142400;
+bpay[281] = 47600;
+bpay[282] = 49000;
+bpay[283] = 50500;
+bpay[284] = 52000;
+bpay[285] = 53600;
+bpay[286] = 55200;
+bpay[287] = 56900;
+bpay[288] = 58600;
+bpay[289] = 60400;
+bpay[290] = 62200;
+bpay[291] = 64100;
+bpay[292] = 66000;
+bpay[293] = 68000;
+bpay[294] = 70000;
+bpay[295] = 72100;
+bpay[296] = 74300;
+bpay[297] = 76500;
+bpay[298] = 78800;
+bpay[299] = 81200;
+bpay[300] = 83600;
+bpay[301] = 86100;
+bpay[302] = 88700;
+bpay[303] = 91400;
+bpay[304] = 94100;
+bpay[305] = 96900;
+bpay[306] = 99800;
+bpay[307] = 102800;
+bpay[308] = 105900;
+bpay[309] = 109100;
+bpay[310] = 112400;
+bpay[311] = 115800;
+bpay[312] = 119300;
+bpay[313] = 122900;
+bpay[314] = 126600;
+bpay[315] = 130400;
+bpay[316] = 134300;
+bpay[317] = 138300;
+bpay[318] = 142400;
+bpay[319] = 146700;
+bpay[320] = 151100;
+bpay[321] = 53100;
+bpay[322] = 54700;
+bpay[323] = 56300;
+bpay[324] = 58000;
+bpay[325] = 59700;
+bpay[326] = 61500;
+bpay[327] = 63300;
+bpay[328] = 65200;
+bpay[329] = 67200;
+bpay[330] = 69200;
+bpay[331] = 71300;
+bpay[332] = 73400;
+bpay[333] = 75600;
+bpay[334] = 77900;
+bpay[335] = 80200;
+bpay[336] = 82600;
+bpay[337] = 85100;
+bpay[338] = 87700;
+bpay[339] = 90300;
+bpay[340] = 93000;
+bpay[341] = 95800;
+bpay[342] = 98700;
+bpay[343] = 101700;
+bpay[344] = 104800;
+bpay[345] = 107900;
+bpay[346] = 111100;
+bpay[347] = 114400;
+bpay[348] = 117800;
+bpay[349] = 121300;
+bpay[350] = 124900;
+bpay[351] = 128600;
+bpay[352] = 132500;
+bpay[353] = 136500;
+bpay[354] = 140600;
+bpay[355] = 144800;
+bpay[356] = 149100;
+bpay[357] = 153600;
+bpay[358] = 158200;
+bpay[359] = 162900;
+bpay[360] = 151100;
+bpay[361] = 56100;
+bpay[362] = 57800;
+bpay[363] = 59500;
+bpay[364] = 61300;
+bpay[365] = 63100;
+bpay[366] = 65000;
+bpay[367] = 67000;
+bpay[368] = 69000;
+bpay[369] = 71100;
+bpay[370] = 73200;
+bpay[371] = 75400;
+bpay[372] = 77700;
+bpay[373] = 80000;
+bpay[374] = 82400;
+bpay[375] = 84900;
+bpay[376] = 87400;
+bpay[377] = 90000;
+bpay[378] = 92700;
+bpay[379] = 95500;
+bpay[380] = 98400;
+bpay[381] = 101400;
+bpay[382] = 104400;
+bpay[383] = 107500;
+bpay[384] = 110700;
+bpay[385] = 114000;
+bpay[386] = 117400;
+bpay[387] = 120900;
+bpay[388] = 124500;
+bpay[389] = 128200;
+bpay[390] = 132000;
+bpay[391] = 136000;
+bpay[392] = 140100;
+bpay[393] = 144300;
+bpay[394] = 148600;
+bpay[395] = 153100;
+bpay[396] = 157700;
+bpay[397] = 162400;
+bpay[398] = 167300;
+bpay[399] = 172300;
+bpay[400] = 177500;
+bpay[401] = 67700;
+bpay[402] = 69700;
+bpay[403] = 71800;
+bpay[404] = 74000;
+bpay[405] = 76200;
+bpay[406] = 78500;
+bpay[407] = 80900;
+bpay[408] = 83300;
+bpay[409] = 85800;
+bpay[410] = 88400;
+bpay[411] = 91100;
+bpay[412] = 93800;
+bpay[413] = 96600;
+bpay[414] = 99500;
+bpay[415] = 102500;
+bpay[416] = 105600;
+bpay[417] = 108800;
+bpay[418] = 112100;
+bpay[419] = 115500;
+bpay[420] = 119000;
+bpay[421] = 122600;
+bpay[422] = 126300;
+bpay[423] = 130100;
+bpay[424] = 134000;
+bpay[425] = 138000;
+bpay[426] = 142100;
+bpay[427] = 146400;
+bpay[428] = 150800;
+bpay[429] = 155300;
+bpay[430] = 160000;
+bpay[431] = 164800;
+bpay[432] = 169700;
+bpay[433] = 174800;
+bpay[434] = 180000;
+bpay[435] = 185400;
+bpay[436] = 191000;
+bpay[437] = 196700;
+bpay[438] = 202600;
+bpay[439] = 208700;
+bpay[440] = 208700;
+bpay[441] = 78800;
+bpay[442] = 81200;
+bpay[443] = 83600;
+bpay[444] = 86100;
+bpay[445] = 88700;
+bpay[446] = 91400;
+bpay[447] = 94100;
+bpay[448] = 96900;
+bpay[449] = 99800;
+bpay[450] = 102800;
+bpay[451] = 105900;
+bpay[452] = 109100;
+bpay[453] = 112400;
+bpay[454] = 115800;
+bpay[455] = 119300;
+bpay[456] = 122900;
+bpay[457] = 126600;
+bpay[458] = 130400;
+bpay[459] = 134300;
+bpay[460] = 138300;
+bpay[461] = 142400;
+bpay[462] = 146700;
+bpay[463] = 151100;
+bpay[464] = 155600;
+bpay[465] = 160300;
+bpay[466] = 165100;
+bpay[467] = 170100;
+bpay[468] = 175200;
+bpay[469] = 180500;
+bpay[470] = 185900;
+bpay[471] = 191500;
+bpay[472] = 197200;
+bpay[473] = 203100;
+bpay[474] = 209200;
+bpay[475] = 209200;
+bpay[476] = 209200;
+bpay[477] = 209200;
+bpay[478] = 209200;
+bpay[479] = 209200;
+bpay[480] = 209200;
+bpay[481] = 123100;
+bpay[482] = 126800;
+bpay[483] = 130600;
+bpay[484] = 134500;
+bpay[485] = 138500;
+bpay[486] = 142700;
+bpay[487] = 147000;
+bpay[488] = 151400;
+bpay[489] = 155900;
+bpay[490] = 160600;
+bpay[491] = 165400;
+bpay[492] = 170400;
+bpay[493] = 175500;
+bpay[494] = 180800;
+bpay[495] = 186200;
+bpay[496] = 191800;
+bpay[497] = 197600;
+bpay[498] = 203500;
+bpay[499] = 209600;
+bpay[500] = 215900;
+bpay[501] = 215900;
+bpay[502] = 215900;
+bpay[503] = 215900;
+bpay[504] = 215900;
+bpay[505] = 215900;
+bpay[506] = 215900;
+bpay[507] = 215900;
+bpay[508] = 215900;
+bpay[509] = 215900;
+bpay[510] = 215900;
+bpay[511] = 215900;
+bpay[512] = 215900;
+bpay[513] = 215900;
+bpay[514] = 215900;
+bpay[515] = 215900;
+bpay[516] = 215900;
+bpay[517] = 215900;
+bpay[518] = 215900;
+bpay[519] = 215900;
+bpay[520] = 215900;
+bpay[521] = 131100;
+bpay[522] = 135000;
+bpay[523] = 139100;
+bpay[524] = 143300;
+bpay[525] = 147600;
+bpay[526] = 152000;
+bpay[527] = 156600;
+bpay[528] = 161300;
+bpay[529] = 166100;
+bpay[530] = 171100;
+bpay[531] = 176200;
+bpay[532] = 181500;
+bpay[533] = 186900;
+bpay[534] = 192500;
+bpay[535] = 198300;
+bpay[536] = 204200;
+bpay[537] = 210300;
+bpay[538] = 216600;
+bpay[539] = 216600;
+bpay[540] = 216600;
+bpay[541] = 216600;
+bpay[542] = 216600;
+bpay[543] = 216600;
+bpay[544] = 216600;
+bpay[545] = 216600;
+bpay[546] = 216600;
+bpay[547] = 216600;
+bpay[548] = 216600;
+bpay[549] = 216600;
+bpay[550] = 216600;
+bpay[551] = 216600;
+bpay[552] = 216600;
+bpay[553] = 216600;
+bpay[554] = 216600;
+bpay[555] = 216600;
+bpay[556] = 216600;
+bpay[557] = 216600;
+bpay[558] = 216600;
+bpay[559] = 216600;
+bpay[560] = 216600;
+bpay[561] = 144200;
+bpay[562] = 148500;
+bpay[563] = 153000;
+bpay[564] = 157600;
+bpay[565] = 162300;
+bpay[566] = 167200;
+bpay[567] = 172200;
+bpay[568] = 177400;
+bpay[569] = 182700;
+bpay[570] = 188200;
+bpay[571] = 193800;
+bpay[572] = 199600;
+bpay[573] = 205600;
+bpay[574] = 211800;
+bpay[575] = 218200;
+bpay[576] = 218200;
+bpay[577] = 218200;
+bpay[578] = 218200;
+bpay[579] = 218200;
+bpay[580] = 218200;
+bpay[581] = 218200;
+bpay[582] = 218200;
+bpay[583] = 218200;
+bpay[584] = 218200;
+bpay[585] = 218200;
+bpay[586] = 218200;
+bpay[587] = 218200;
+bpay[588] = 218200;
+bpay[589] = 218200;
+bpay[590] = 218200;
+bpay[591] = 218200;
+bpay[592] = 218200;
+bpay[593] = 218200;
+bpay[594] = 218200;
+bpay[595] = 218200;
+bpay[596] = 218200;
+bpay[597] = 218200;
+bpay[598] = 218200;
+bpay[599] = 218200;
+bpay[600] = 218200;
+bpay[601] = 182200;
+bpay[602] = 187700;
+bpay[603] = 193300;
+bpay[604] = 199100;
+bpay[605] = 205100;
+bpay[606] = 211300;
+bpay[607] = 217600;
+bpay[608] = 224100;
+bpay[609] = 224100;
+bpay[610] = 224100;
+bpay[611] = 224100;
+bpay[612] = 224100;
+bpay[613] = 224100;
+bpay[614] = 224100;
+bpay[615] = 224100;
+bpay[616] = 224100;
+bpay[617] = 224100;
+bpay[618] = 224100;
+bpay[619] = 224100;
+bpay[620] = 224100;
+bpay[621] = 224100;
+bpay[622] = 224100;
+bpay[623] = 224100;
+bpay[624] = 224100;
+bpay[625] = 224100;
+bpay[626] = 224100;
+bpay[627] = 224100;
+bpay[628] = 224100;
+bpay[629] = 224100;
+bpay[630] = 224100;
+bpay[631] = 224100;
+bpay[632] = 224100;
+bpay[633] = 224100;
+bpay[634] = 224100;
+bpay[635] = 224100;
+bpay[636] = 224100;
+bpay[637] = 224100;
+bpay[638] = 224100;
+bpay[639] = 224100;
+bpay[640] = 224100;
+bpay[641] = 205400;
+bpay[642] = 211600;
+bpay[643] = 217900;
+bpay[644] = 224400;
+bpay[645] = 224400;
+bpay[646] = 224400;
+bpay[647] = 224400;
+bpay[648] = 224400;
+bpay[649] = 224400;
+bpay[650] = 224400;
+bpay[651] = 224400;
+bpay[652] = 224400;
+bpay[653] = 224400;
+bpay[654] = 224400;
+bpay[655] = 224400;
+bpay[656] = 224400;
+bpay[657] = 224400;
+bpay[658] = 224400;
+bpay[659] = 224400;
+bpay[660] = 224400;
+bpay[661] = 224400;
+bpay[662] = 224400;
+bpay[663] = 224400;
+bpay[664] = 224400;
+bpay[665] = 224400;
+bpay[666] = 224400;
+bpay[667] = 224400;
+bpay[668] = 224400;
+bpay[669] = 224400;
+bpay[670] = 224400;
+bpay[671] = 224400;
+bpay[672] = 224400;
+bpay[673] = 224400;
+bpay[674] = 224400;
+bpay[675] = 224400;
+bpay[676] = 224400;
+bpay[677] = 224400;
+bpay[678] = 224400;
+bpay[679] = 224400;
+bpay[680] = 224400;
+
+
+function a1(l1) 
+{
+  var lev1 = l1.value;
+  var len1 = llen;
+  var level_no;
+  var bpay_len = bpay.length;
+  var from1;
+  var to1;
+  var j;
+
+  document.getElementById("bb11").innerHTML = " ( From Level :: "+lev1+" )"
+
+  for ( var i = 0; i<len1; i++)
+      {
+     if ( lev1 == lev_arr[i] )
+		 level_no=i;
+      }
+
+j = level_no-1;
+
+from1=(j*40)+1;
+to1=from1+39;
+
+basic_pay = "<select id='basic_pay' name=basic_pay onChange='Javascript:a2x(this);'>";
+
+for ( var i=from1;i<=to1;i++)
+    {
+    basic_pay += "<option value='"+bpay[i]+"'>"+bpay[i]+"</option>";
+    }
+
+basic_pay += "</select>";
+
+
+document.getElementById("bp11").innerHTML = basic_pay;
+}
+
+function get_pay_range(levels1)
+{
+var level_no1;
+var j;
+var pay_range="0 ";
+
+for ( var i=0; i<llen; i++)
+   {
+  if ( levels1 == lev_arr[i] )
+	level_no1=i;
+   }
+j = level_no1-1;
+from1=(j*40)+1;
+to1=from1+39;
+
+for ( var i=from1; i<=to1; i++)
+   {
+   pay_range += " , "+bpay[i];
+   }
+return pay_range;
+}
+
+function a2(l2)
+{
+var ex_stage1;
+var promoted_pay;
+var f1_pay;
+var f2_pay;
+var f3_pay;
+var f3;
+
+
+var ex_level = document.getElementById("lev1").value;
+var to_level = document.getElementById("lev11").value;
+var ex_pay = parseInt(document.getElementById("basic_pay").value);
+var dop = document.getElementById("dop").value;
+
+var ex_pay_range = get_pay_range(ex_level);
+var to_pay_range = get_pay_range(to_level);
+var ex_arr = ex_pay_range.split(",");
+var to_arr = to_pay_range.split(",");
+
+if ( to_level == "00" )
+   {
+      return false;
+   }
+
+
+for ( var i=0; i < ex_arr.length;i++)
+    {
+    if ( parseInt(ex_arr[i]) == parseInt(ex_pay) )
+      ex_stage1 = i;
+    }
+document.getElementById("aa111").innerHTML = "Stage-"+ex_stage1;
+ex_stage1++;
+give_one_incr_lg = parseInt(ex_arr[ex_stage1]);
+ex_stage1++;
+give_two_incr_lg = parseInt(ex_arr[ex_stage1]);
+
+for ( var i=0; i < to_arr.length;i++)
+    {
+      if ( parseInt(to_arr[i]) >= give_one_incr_lg )
+     	 {
+		 promoted_pay = to_arr[i];
+		 i=50;
+		 }
+    }
+
+for ( var i=0; i < to_arr.length;i++)
+    {
+    if ( parseInt(to_arr[i]) > ex_pay )
+	  {
+	  f1pay = to_arr[i];
+	  i=50;
+	  }
+    }
+
+for ( var i=0; i < to_arr.length;i++)
+    {
+    if ( parseInt(to_arr[i]) >= give_two_incr_lg )
+	{
+	f2pay = to_arr[i];
+	f3=i;
+	i=50;
+	}
+    }
+
+f3++;
+
+f3pay = to_arr[f3];
+
+e1 = ex_arr.length;
+e2 = to_arr.length;
+
+
+dop_arr =dop.split("/");
+
+dd=parseInt(dop_arr[0]);
+mm=parseInt(dop_arr[1])-1;
+yy=parseInt(dop_arr[2]);
+yy1=yy+1;
+
+// date object - created but not used
+var d = new Date(yy,mm,dd);
+mm++;
+
+pro_date = dop;
+
+if ( mm < 7 ) 
+   {
+f1date = pro_date;
+f2date = "01/07/"+yy;
+f3date = "01/01/"+yy1;
+   }
+else
+   {
+f1date = pro_date;
+f2date = "01/07/"+yy1;
+yy1++;
+f3date = "01/01/"+yy1;
+   }
+
+if ( ( mm == 7 ) && ( dd == 1 ) )   
+   {
+   	yy1=yy+1;
+f1date = pro_date;
+f2date = "01/07/"+yy;
+f3date = "01/01/"+yy1;
+   }
+
+f3_arr = f3date.split("/");
+
+dd3 = f3_arr[0];
+mm3 = f3_arr[1];
+yy3 = f3_arr[2];
+yy3++;
+
+
+opbuf = "<center><table cellpadding=7  border=1 style='border-color:blue;border-collapse:collapse;background-color:rgb(250,250,250)' >";
+opbuf += "<td colspan=3 id=even1> Given Data ... <tr>";
+opbuf += "<td> Ex-Level = <th> "+ex_level;
+opbuf += "<td>";
+
+for ( var i=1; i<e1; i++ )
+    {
+   if ( parseInt(ex_arr[i]) == ex_pay )
+   	  {
+   	  	opbuf += "<span id=val1>"+ex_arr[i]+"</span> / ";
+   	  	e1=i+5;
+   	  	if ( e1 > ex_arr.length )
+   	  		e1=ex_arr.length;
+   	  }
+   	else
+   		opbuf += "<span>"+ex_arr[i]+"</span> / "; 
+if ( i % 5 == 0 )
+	opbuf += " <br> "
+
+    }
+
+
+
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Date of Promotion <td>"+dop;
+opbuf += "<tr>";
+opbuf += "<td> Promoted-Level = <th> "+to_level;
+opbuf += "<td>";
+
+for ( var i=1; i<e2; i++ )
+    {
+   if ( parseInt(to_arr[i]) == promoted_pay )
+   	  {
+   	  	opbuf += "<span id=val1>"+to_arr[i]+"</span> / ";
+   	  	e2=i+8;
+   	  	if ( e2 > to_arr.length )
+   	  		e2 = to_arr.length;
+   	  }
+   	else
+   		opbuf += "<span>"+to_arr[i]+"</span> / "; 
+
+	if ( i % 5 == 0 )
+		opbuf += " <br> "
+
+    }
+opbuf += "<tr>";
+opbuf += "<th id=even1 colspan=3> Calculated Values "
+opbuf += "<tr>";
+opbuf += "<th id=odd1> Nature of activity <th id=odd1> Basic Pay <th id=odd1> W-E-F "
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Ex-Pay <td>"+ex_pay+"<td> Before Promotion ";
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Promoted Pay <td>"+promoted_pay;
+opbuf += "<td>"+pro_date;
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Initial Fixation <td>"+f1pay;
+opbuf += "<td>"+f1date;
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Final Fixation <td>"+f2pay;
+opbuf += "<td>"+f2date;
+opbuf += "<tr>";
+opbuf += "<td colspan=1> Incrmnt after 6 months <td>"+f3pay
+opbuf += "<td>"+f3date;
+
+if  ( ( promoted_pay == f1pay ) && ( f1pay == f2pay ) )
+	{
+
+    opbuf += "<tr>";
+opbuf += "<th colspan=3>";
+	opbuf += "<span id=val1  style='font-size:16px'>  This Option not beneficial </span> ";
+	opbuf += "</b>";
+	}
+else
+	{
+opbuf += "<tr>";	
+
+f4=0;
+
+for ( var i=0; i < to_arr.length;i++)
+    {
+    if ( parseInt(to_arr[i]) == f2pay )
+	{
+	f2pay = to_arr[i];
+	f4=i;
+	i=50;
+	}
+    }
+
+f4++;
+f4++;
+var dt55 = new Date();
+
+
+var yr55 = dt55.getFullYear();
+
+yr55 = yr55+1;
+
+for ( var i=yy3; i < yr55; i++ )
+    {
+opbuf += "<td> Next Annual Increment ";
+opbuf += "<td>"+to_arr[f4];
+opbuf += "<td>"+dd3+"/"+mm3+"/"+i;
+opbuf += "<tr>";
+f4++;
+    }
+
+    }
+opbuf += "</table>";
+
+
+
+document.getElementById("out_put").innerHTML = opbuf;
+
+}
+
+</script>
+</head>
+
+<body onLoad=get_levels();>
+
+<center>Pay Fixation  <br> [ Reference  :: RBE No: 212/2019 dtd 18/12/2019 ]
+	<br><br>
+<table cellpadding=5 border=1 style='border-collapse:collapse'>
+<td> Select 7<sup>th</sup> CPC :: Level <br> [Before Promotion] </td>
+<td>
+<p id="aa11">
+Enable Javascript
+</p>
+
+</td>
+
+<tr>
+<td> Select Basic Pay <br><span style='font-size:11px'>[Before Promn]</span> <div id="bb11"> </div> </td>
+<td><p id="bp11"> -- </p>
+
+<p id="aa111"> </p>
+    </td>
+<tr>
+<td> Date of Promotion <br>( in <b style='color:green'>dd/mm/yyyy</b> format ) </td>
+<td><input type=text size=12 id=dop name=dop value='03/01/2020' onClick=this.select();>   </td>
+<tr>
+<td> Select Promoted Level 
+<td>
+<p id="aa12">
+
+</p>
+<tr>
+	<td colspan=2>
+		<input type=button name=btn1 id=btn1 value='Please Click here to Calculate ' onClick=a2(this)>
+		
+<tr>
+<td colspan=2>
+
+	<p id="out_put">
+
+</p>
+
+</table>
+
+<script>
+
+</script>
+
+</html>
